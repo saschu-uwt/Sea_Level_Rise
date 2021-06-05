@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Sea Level Rise and the Port of Tacoma</title>
+		<!-- <link rel="stylesheet" href="styles.css" type="text/css" -->
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+		<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+		<style>
+			body { margin: 0; padding: 0; }
+		</style>
+	</head>
+	<body>
+		<style>
+			body {
+			overflow: hidden;
+			background-color: #D3D3D3;
+				font-family: Arial, sans-serif;
+			}
+			body * {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			}
+			.map {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+			}
+			.map-overlay {
+			  position: absolute;
+			  bottom: 20px;
+			  right: 10px;
+			  background: rgba(255, 255, 255, 0.9);
+			  font-family: Arial, sans-serif;
+			  overflow: auto;
+			  border-radius: 5px;
+			}
+			#right {
+			  top: 10px;
+			  height: 70px;
+			  padding: 10px;
+			  width: auto;
+			}
+			#left {
+			  top: 10px;
+				left: 10px;
+			  height: 70px;
+			  padding: 10px;
+			  width: 150px;
+			}
+
+		</style>
+		<!-- Swipe between maps -->
+		<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css"
+			type="text/css"
+		/>
+
+		<div id="comparison-container">
+			<div id="before" class="map"></div>
+			<div id="after" class="map"></div>
+		</div>
+
+		<div class='map-overlay' id='left'><h2>13-Foot Tide</h2></div>
+		<div class='map-overlay' id='right'><h2>16-Foot Tide</h2></div>
+
+		<script>
+
+		mapboxgl.accessToken = 'pk.eyJ1Ijoic2FzY2h1IiwiYSI6ImNrZ3poNGVkYjA1b3Ayd3JzOHczb29iNjEifQ.MqXTIcUhZl4C-s0Jk5o49A';
+		var bounds = [
+			[-122.6, 47.1],
+			[-122.2, 47.4]
+		];
+		var beforeMap = new mapboxgl.Map({
+			container: 'before',
+			style: 'mapbox://styles/saschu/ckpk5t7gm2nem17lmo93avcrx',
+			center: [-122.405, 47.265],
+				zoom: 12.5,
+			maxBounds: bounds
+		});
+		var afterMap = new mapboxgl.Map({
+			container: 'after',
+			style: 'mapbox://styles/saschu/ckpk62nbs2qri18qhm2xdub40',
+			center: [-122.405, 47.265],
+			zoom: 12.5,
+			maxBounds: bounds
+		});
+
+		// A selector or reference to HTML element
+		var container = '#comparison-container';
+		var map = new mapboxgl.Compare(beforeMap, afterMap, container, {
+		// Set this to enable comparing two maps by mouse movement (but not for this map!):
+		// mousemove: true
+		});
+
+		</script>
+
+	</body>
+	</html>
